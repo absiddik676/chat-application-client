@@ -10,13 +10,13 @@ const SideContent = () => {
                 <BsFillChatDotsFill className='text-white' size={40} />
             </div>
             <div>
-                <BiSolidUser className='my-6' size={40} />
+                <BiSolidUser className='my-6 text-gray-400' size={40} />
             </div>
             <div>
-                <AiFillStar className='mb-6 ' size={40} />
+                <AiFillStar className='mb-6 text-gray-400' size={40} />
             </div>
             <div>
-                <FaRegCalendarCheck size={40} />
+                <FaRegCalendarCheck className='text-gray-400' size={40} />
             </div>
         </div>
     );
