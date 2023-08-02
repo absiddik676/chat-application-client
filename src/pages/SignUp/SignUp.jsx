@@ -7,7 +7,7 @@ const SignUp = () => {
             <div className=' w-20 h-16 rounded-lg flex justify-center items-center bg-gradient-to-tr from-rose-400 to-red-500'>
                 <BsFillChatDotsFill className='text-white' size={50} />
             </div>
-            <h1 className="text-2xl font-bold mb-9 my-9">Sign Up</h1>
+            <h1 className="text-3xl font-semibold mb-9 my-9">Sign Up</h1>
             <div className='w-full'>
                 <div className="max-w-md mx-auto bg-white p-8 rounded shadow">
                    
@@ -78,7 +78,8 @@ const SignUp = () => {
                             Sign Up
                         </button>
                     </form>
-                    <p className='mt-2 font-semibold'>Already have an account? <Link className='text-blue-600'>Login Now</Link></p>
+                   
+                    <p className='mt-2 font-semibold'>Already have an account? <Link to='/login' className=" font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-tr from-rose-400 to-red-500">Login Now</Link></p>
                 </div>
             </div>
         </div>
