@@ -17,6 +17,6 @@ import Login from "../pages/Login/Login";
     {
       path:'/login',
       element:<Login/>
-    }
+    },
   ]);
   export default router

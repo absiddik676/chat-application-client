@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { RiEyeFill, RiEyeCloseFill } from "react-icons/ri";
+import { AuthContext } from '../../Provider/AuthProvider';
 const SignUp = () => {
+    const {createUser,updateUserData} = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data);
+        createUser(data.email,data.password)
+        .then(res =>{
+            console.log(res);
+            updateUserData(data.name)
+            
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+
     }
 
     const [showPassword, setShowPassword] = useState(false);
