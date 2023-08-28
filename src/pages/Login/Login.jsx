@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { RiEyeFill, RiEyeCloseFill } from "react-icons/ri";
+import { AuthContext } from '../../Provider/AuthProvider';
 const Login = () => {
+    const  {loginUser} = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data);
+        loginUser(data.email, data.password)
+        .then(res =>{
+            console.log(res);
+        })
+        .catch(error =>{
+            console.log(error);
+        })
     }
-
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -23,10 +31,8 @@ const Login = () => {
             <div className='w-full'>
                 <div className="max-w-md mx-auto bg-white p-8 rounded shadow-sm">
                    
-                    <form >
-
-                        <div className="mb-4">
-                            
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                         <div className="mb-4">
                             <input
                                 type="email"
                                 id="email"
@@ -34,7 +40,7 @@ const Login = () => {
                                 className="w-full bg-stone-200 outline-none border rounded px-3 py-2"
                                 required
                                 placeholder='Email'
-                                {...register("password")}
+                                {...register("email")}
                             />
                         </div>
                         <div className='mb-4'>

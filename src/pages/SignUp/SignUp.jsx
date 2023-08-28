@@ -4,20 +4,28 @@ import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { RiEyeFill, RiEyeCloseFill } from "react-icons/ri";
 import { AuthContext } from '../../Provider/AuthProvider';
+import axios from 'axios';
 const SignUp = () => {
-    const {createUser,updateUserData} = useContext(AuthContext)
+    const { createUser, updateUserData } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data);
-        createUser(data.email,data.password)
-        .then(res =>{
-            console.log(res);
-            updateUserData(data.name)
-            
-        })
-        .catch(error =>{
-            console.log(error);
-        })
+        createUser(data.email, data.password)
+            .then(res => {
+                console.log(res);
+                updateUserData(data.name)
+                const saveData = { name: data.name, email: data.email, phone: data.phone, address: data.address, }
+                console.log(saveData);
+                axios.post('http://localhost:3000/user', saveData)
+                    .then(res => {
+                        console.log(res.data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
 
@@ -43,7 +51,7 @@ const SignUp = () => {
                                 id="name"
                                 name="name"
                                 className="w-full bg-stone-200 outline-none border rounded px-3 py-2"
-                                
+
                                 placeholder='Name'
                                 {...register("name", { required: true })}
                             />
@@ -57,12 +65,12 @@ const SignUp = () => {
                                 id="email"
                                 name="email"
                                 className="w-full bg-stone-200 outline-none border rounded px-3 py-2"
-                                
+
                                 placeholder='Email'
                                 {...register("email", { required: true })}
-                                
+
                             />
-                                  {errors.email?.type === 'required' && <p className='text-red-500 '>Email is required</p>}
+                            {errors.email?.type === 'required' && <p className='text-red-500 '>Email is required</p>}
                         </div>
 
                         <div className="mb-4">
@@ -72,7 +80,7 @@ const SignUp = () => {
                                 id="phone"
                                 name="phone"
                                 className="w-full bg-stone-200 outline-none border rounded px-3 py-2"
-                                
+
                                 placeholder='Phone'
                                 {...register("phone")}
                             />
@@ -85,7 +93,7 @@ const SignUp = () => {
                                 id="address"
                                 name="address"
                                 className="w-full bg-stone-200 outline-none border rounded px-3 py-2"
-                                
+
                                 placeholder='Address'
                                 {...register("address")}
                             />
@@ -97,20 +105,20 @@ const SignUp = () => {
                                     id="password"
                                     name="password"
                                     className="w-full shrink-0 bg-stone-200 outline-none border rounded px-3 py-2 pr-10"
-                                    
+
                                     placeholder="Password"
                                     {...register("password", {
                                         required: "Password is required",
                                         minLength: {
-                                          value: 8,
-                                          message: "Password must be at least 8 characters",
+                                            value: 8,
+                                            message: "Password must be at least 8 characters",
                                         },
                                         pattern: {
-                                          value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                          message: "Password must contain at least one letter and one number",
+                                            value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/,
+                                            message: "Password must contain at least one letter and one number",
                                         },
-                                      })}
-                                
+                                    })}
+
                                 />
                                 <button
                                     type="button"
@@ -120,7 +128,7 @@ const SignUp = () => {
                                     {showPassword ? <RiEyeCloseFill /> : <RiEyeFill />}
                                 </button>
                             </div>
-                        
+
                             {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                         </div>
 

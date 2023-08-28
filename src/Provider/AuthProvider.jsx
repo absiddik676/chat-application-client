@@ -10,9 +10,9 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
-    const signUpUser = (email,password) =>{
-        setLoading(true);
-        signInWithEmailAndPassword(auth, email, password)
+    const loginUser = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     const updateUserData = (name) =>{
@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
 
     const authInfo = {
         createUser,
-        signUpUser,
+        loginUser,
         user,
         updateUserData
     }
